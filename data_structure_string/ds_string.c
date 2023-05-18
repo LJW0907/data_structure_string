@@ -23,17 +23,18 @@ int read_line(char* str, int limit) { //단점을 모두 보완한 문자열 입력 함수
 				str[i++] = tmp = ch;
 			}
 		}
-	if (str[i - 1] == ' ') {
-		str[i - 1] = '\0';
-		i--;
-	}
-	else
-		str[i] = '\0';
 
+	if (str[i - 1] == ' ') 
+		i--;
+
+
+	str[i] = '\0';
 	return i; //문자열 길이 반환
 }
 
 int main() {
+	//첫번째 연습문제
+
 	//char str[10];
 
 	//while (1) {
