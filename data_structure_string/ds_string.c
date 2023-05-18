@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define SIZE 30
+
 int strlen_user(char *str) {
 	int len = 0;
 
@@ -13,30 +15,22 @@ int strlen_user(char *str) {
 
 int read_line(char* str, int limit) { //단점을 모두 보완한 문자열 입력 함수
 	int ch, i = 0;
+	char tmp = ' ';
 
 	while ((ch = getchar()) != '\n') //getchar()의 반환형은 int다!! 명심
-		if (i < limit)
-			str[i++] = ch;
-
-	str[i] = '\0';
+		if (i < limit) {
+			if (tmp != ' ' || ch != ' ') {
+				str[i++] = tmp = ch;
+			}
+		}
+	if (str[i - 1] == ' ') {
+		str[i - 1] = '\0';
+		i--;
+	}
+	else
+		str[i] = '\0';
 
 	return i; //문자열 길이 반환
- }
-
-void printString(char* str) {
-	char tmp = ' ';
-	int i = 0;
-	int len = 0;
-
-	for (int i = 0; str[i] != '\0'; i++) {
-		if (tmp != ' ' || str[i] != ' ') {
-			printf("%c", str[i]);
-			tmp = str[i];
-			len++;
-		}
-	}
-
-	printf(":%d\n", len);
 }
 
 int main() {
@@ -58,15 +52,16 @@ int main() {
 
 	//두 번째 연습문제, 불필요한 공백을 제거하고 출력하라
 	//문장 앞뒤에 붙은 공백은 제거, 두 개 이상의 연속된 공백은 하나로 대체
-	char str[10];
+	char str[SIZE];
+	int len;
 
 	while (1) {
 		printf("& ");
 
 		//scanf_s("%[^\n]*c", str, 10);
-		read_line(str, 30);
+		len = read_line(str, SIZE);
 
-		printString(str);
+		printf("%s:%d\n", str, len);
 	}
 
 }
